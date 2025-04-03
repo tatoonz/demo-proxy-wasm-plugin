@@ -19,3 +19,16 @@ services:
     volumes:
       - ./kong.yml:/kong_dbless/kong.yml
       - ./my-first-plugin/target/wasm32-wasip1/release/my_first_plugin.wasm:/wasm/my_first_plugin.wasm
+
+  apisix:
+    image: apache/apisix:3.11.0-debian
+    container_name: apisix
+    restart: unless-stopped
+    ports:
+      - "9080:9080"
+    environment:
+      - APISIX_STAND_ALONE=true
+    volumes:
+      - ./apisix/config.yaml:/usr/local/apisix/conf/config.yaml
+      - ./apisix/apisix.yaml:/usr/local/apisix/conf/apisix.yaml
+      - ./my-first-plugin/target/wasm32-wasip1/release/my_first_plugin.wasm:/wasm/my_first_plugin.wasm

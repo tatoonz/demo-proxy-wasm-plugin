@@ -1,0 +1,16 @@
+upstreams:
+  - id: httpbin
+    scheme: https
+    nodes:
+      "httpbin.org:443": 1
+
+routes:
+  - id: httpbin 
+    uri: /httpbin/*
+    upstream_id: httpbin
+    plugins:
+      proxy-rewrite:
+        regex_uri: ["^/httpbin/(.*)", "/$1"]
+      my-first-plugin:
+        conf: "cant-leave-blank"
+#END
