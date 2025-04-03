@@ -1,0 +1,15 @@
+_format_version: "3.0"
+
+services:
+- name: httpbin
+  url: https://httpbin.org
+  filter_chains:
+    - name: my-filter-chain
+      enabled: true
+      filters:
+        - name: my_first_plugin
+  routes:
+  - name: httpbin
+    paths:
+    - /httpbin
+    strip_path: true

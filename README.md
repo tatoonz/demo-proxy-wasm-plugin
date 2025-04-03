@@ -1,1 +1,7 @@
-# proxy-wasm-plugin-demo
+# Proxy-Wasm Plugin Demo
+
+## Start
+
+```
+make start
+```

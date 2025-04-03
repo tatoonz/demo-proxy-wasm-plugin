@@ -1,0 +1,21 @@
+services:
+  kong:
+    container_name: kong-gateway
+    image: kong/kong-gateway:3.9
+    restart: unless-stopped
+    environment:
+      KONG_LOG_LEVEL: info
+      KONG_DATABASE: off
+      KONG_PROXY_ACCESS_LOG: /dev/stdout
+      KONG_ADMIN_ACCESS_LOG: /dev/stdout
+      KONG_PROXY_ERROR_LOG: /dev/stderr
+      KONG_ADMIN_ERROR_LOG: /dev/stderr
+      KONG_NGINX_WORKER_PROCESSES: "1"
+      KONG_DECLARATIVE_CONFIG: /kong_dbless/kong.yml
+      KONG_WASM: on
+      KONG_WASM_FILTERS_PATH: /wasm
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./kong.yml:/kong_dbless/kong.yml
+      - ./my-first-plugin/target/wasm32-wasip1/release/my_first_plugin.wasm:/wasm/my_first_plugin.wasm
